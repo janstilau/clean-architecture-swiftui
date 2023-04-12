@@ -55,6 +55,7 @@ extension RealCountriesWebRepository.API: APICall {
         switch self {
         case .allCountries:
             return "/all"
+        // 给参数进行 Encode, 而不是整个 URL 进行 Encode, 这是 URL Encode 的合理的解决方法.
         case let .countryDetails(country):
             let encodedName = country.name.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
             return "/name/\(encodedName ?? country.name)"

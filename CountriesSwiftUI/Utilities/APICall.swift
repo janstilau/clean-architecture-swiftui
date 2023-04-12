@@ -8,13 +8,6 @@
 
 import Foundation
 
-protocol APICall {
-    var path: String { get }
-    var method: String { get }
-    var headers: [String: String]? { get }
-    func body() throws -> Data?
-}
-
 enum APIError: Swift.Error {
     case invalidURL
     case httpCode(HTTPCode)
@@ -31,6 +24,13 @@ extension APIError: LocalizedError {
         case .imageDeserialization: return "Cannot deserialize image from Data"
         }
     }
+}
+
+protocol APICall {
+    var path: String { get }
+    var method: String { get }
+    var headers: [String: String]? { get }
+    func body() throws -> Data?
 }
 
 extension APICall {

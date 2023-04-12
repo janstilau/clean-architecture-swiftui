@@ -31,6 +31,9 @@ extension WebRepository {
 
 // MARK: - Helpers
 
+// typealias URLSession.DataTaskPublisher.Output = (data: Data, response: URLResponse)
+// 相比较于, 自定定义 Operator.
+// 给 Publisher 添加方法, 利用已有的 Operator 来构建出更加符合业务场景的 Operator, 是更加合理的做法. 
 extension Publisher where Output == URLSession.DataTaskPublisher.Output {
     func requestData(httpCodes: HTTPCodes = .success) -> AnyPublisher<Data, Error> {
         return tryMap {
@@ -48,6 +51,7 @@ extension Publisher where Output == URLSession.DataTaskPublisher.Output {
     }
 }
 
+// 
 private extension Publisher where Output == URLSession.DataTaskPublisher.Output {
     func requestJSON<Value>(httpCodes: HTTPCodes) -> AnyPublisher<Value, Error> where Value: Decodable {
         return requestData(httpCodes: httpCodes)
