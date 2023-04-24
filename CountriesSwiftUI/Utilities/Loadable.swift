@@ -11,13 +11,14 @@ import SwiftUI
 
 typealias LoadableSubject<Value> = Binding<Loadable<Value>>
 
+// 使用 Enum 当做数据盒子来看.
 enum Loadable<T> {
-
+    
     case notRequested
     case isLoading(last: T?, cancelBag: CancelBag)
     case loaded(T)
     case failed(Error)
-
+    
     var value: T? {
         switch self {
         case let .loaded(value): return value

@@ -103,11 +103,11 @@ extension LazyList: Sequence {
             }
         }
     }
-
+    
     func makeIterator() -> Iterator {
         .init(list: self)
     }
-
+    
     var underestimatedCount: Int { count }
 }
 
@@ -124,11 +124,11 @@ extension LazyList: RandomAccessCollection {
             fatalError("\(error)")
         }
     }
-
+    
     public func index(after index: Index) -> Index {
         return index + 1
     }
-
+    
     public func index(before index: Index) -> Index {
         return index - 1
     }

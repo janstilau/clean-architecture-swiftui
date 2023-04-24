@@ -46,7 +46,9 @@ struct CountriesList: View {
         .onReceive(inspection.notice) { self.inspection.visit(self, $0) }
     }
     
+    // Content 在 body 里面被使用了.
     @ViewBuilder private var content: some View {
+        // 根据当前 enum 的状态不同, 来进行不同的 View 显示.
         switch countries {
         case .notRequested:
             notRequestedView
@@ -140,8 +142,12 @@ private extension CountriesList {
 // MARK: - Displaying Content
 
 private extension CountriesList {
+    // 各个 View 都是函数生成的. 没有 View 的对象实例.
+    // 也就是说, 这只是一个 View 表现.
     func loadedView(_ countries: LazyList<Country>, showSearch: Bool, showLoading: Bool) -> some View {
         VStack {
+            // 各种的 View 状态, 通过可以进行信号发送的 VM 中的数据进行读取.
+            // 这样 VM 中的数据变化, 也就可以导致 View 的状态变化. 
             if showSearch {
                 SearchBar(text: $countriesSearch.searchText
                     .onSet { _ in
